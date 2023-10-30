@@ -5,7 +5,7 @@
 #include <SPI.h>
 #include <Adafruit_GFX.h>
 #include <Max72xxPanel.h>
-
+//test
 const byte  _Dclock = 0, _Dwifi = 0 ;
 
 //#define  ip_zna  //без комента 100 наполььные  с коментом 101
