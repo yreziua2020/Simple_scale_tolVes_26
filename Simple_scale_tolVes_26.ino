@@ -6,7 +6,7 @@
 #include <Adafruit_GFX.h>
 #include <Max72xxPanel.h>
 
-const byte _debag = 0, _debag2 = 0, _Dclock = 0, _Dwifi = 0, _D18b20=0;
+const byte  _Dclock = 0, _Dwifi = 0 ;
 
 //#define  ip_zna  //без комента 100 наполььные  с коментом 101
 //#define  kalib  //ели роз кометировать то калибруем
@@ -152,7 +152,11 @@ void loop() {
        if ( (millis()-tara_timer) > 1000)  
        {
           tara_timer = millis();
-          if (z_tara++>50){z_tara=0; if (units <100) {scale.tare();}Serial.print("Тара в автомате");}
+          if (z_tara++>50)    
+                {z_tara=0; 
+                if (units <100) {scale.tare();  Serial.print("Тара обнулилась"); } 
+                else {Serial.print("Тара обнуления не было");}
+                }
        }
      z_clok = 0;//f_clok_D = 0;
    }
