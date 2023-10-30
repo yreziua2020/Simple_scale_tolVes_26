@@ -140,31 +140,27 @@ void loop() {
     ///if (!f_yark_d && (h>6 || h<20)){f_yark_n=0;f_yark_d=1;matrix.setIntensity(6); Serial.print("яркость 5");}   
    
 #ifdef ip_zna
-   if (units > -100 && units < 100 ) 
+  if (units > -100 && units < 100 ) 
   {
 #else 
   if (units > -10 && units < 10 )  
   {
 #endif
-       if ((millis()-clok_timer) > 10000)  { clok_timer = millis();  f_clok_D = 1; Serial.print("f_clok_D=1");}
-       z_tara=0;
-       //Serial.print("z_tara=0");
-     tara_timer = millis();
+      if ((millis()-clok_timer) > 30000)  { clok_timer = millis();  f_clok_D = 1; Serial.print("f_clok_D=1");}
+      tara_timer = millis();
    } 
    else
    {
        if ( (millis()-tara_timer) > 20000)  
        {
           tara_timer = millis();
-          Serial.print("z_tara=");Serial.println(z_tara);
-         // if (z_tara++>50)    
-          //      {z_tara=0; 
-                if (units <100) {scale.tare();  Serial.print("Тара обнулилась"); } 
-                else {Serial.print("Тара обнуления не было");}
-            //    }
+          //Serial.print("z_tara=");Serial.println(z_tara);
+          if (units <100) {scale.tare();  Serial.print("Тара обнулилась"); } 
+          else {Serial.print("Тара обнуления не было");}
+         
        }  
-     z_clok = 0;
-     f_clok_D = 0; clok_timer = millis(); 
+     f_clok_D = 0;
+     clok_timer = millis(); 
    }
 
   HTTP.handleClient();
