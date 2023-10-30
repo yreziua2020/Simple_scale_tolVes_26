@@ -147,6 +147,8 @@ void loop() {
        if ((z_clok >= 10) || ( (millis()-clok_timer) > 1000) ) {
        clok_timer = millis();
        if (z_clok <= 100) {  z_clok++;  } else { f_clok_D = 1; }
+
+       z_tara=0;Serial.print("z_tara=0");
      }
    } else {
        if ( (millis()-tara_timer) > 1000)  
@@ -158,7 +160,7 @@ void loop() {
                 if (units <100) {scale.tare();  Serial.print("Тара обнулилась"); } 
                 else {Serial.print("Тара обнуления не было");}
                 }
-       }
+       }  
      z_clok = 0;//f_clok_D = 0;
    }
 
