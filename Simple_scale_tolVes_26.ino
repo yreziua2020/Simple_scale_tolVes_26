@@ -152,7 +152,7 @@ void loop() {
        if ( (millis()-tara_timer) > 1000)  
        {
           tara_timer = millis();
-          Serial.print("z_tara=");Serial.println("z_tara");
+          Serial.print("z_tara=");Serial.println(z_tara);
           if (z_tara++>50)    
                 {z_tara=0; 
                 if (units <100) {scale.tare();  Serial.print("Тара обнулилась"); } 
