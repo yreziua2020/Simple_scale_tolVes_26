@@ -27,7 +27,7 @@ void Display() {
     //matrix.drawChar(22, y, chis5[0], HIGH, LOW, 1);
     //matrix.drawChar(27, y, chis6[0], HIGH, LOW, 1);
    
-    f_clok_D=0;
+    //f_clok_D=0;
     //matrix.drawChar(7, y, (String(","))[0], HIGH, LOW, 1);
   } else {
     if (f_eror_sql) {

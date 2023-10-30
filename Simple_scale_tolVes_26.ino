@@ -144,12 +144,10 @@ void loop() {
 #else 
   if (units > -10 && units < 10 )  {
 #endif
-       if ((z_clok >= 10) || ( (millis()-clok_timer) > 1000) ) {
-       clok_timer = millis();
-       if (z_clok <= 100) {  z_clok++;  } else { f_clok_D = 1; }
+       if ((millis()-clok_timer) > 10000)  { clok_timer = millis();  f_clok_D = 1; Serial.print("f_clok_D=1");}
 
        z_tara=0;Serial.print("z_tara=0");
-     }
+     
    } else {
        if ( (millis()-tara_timer) > 1000)  
        {
@@ -161,7 +159,8 @@ void loop() {
                 else {Serial.print("Тара обнуления не было");}
                 }
        }  
-     z_clok = 0;//f_clok_D = 0;
+     z_clok = 0;
+     f_clok_D = 0; clok_timer = millis(); 
    }
 
   HTTP.handleClient();
