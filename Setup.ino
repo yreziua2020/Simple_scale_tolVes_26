@@ -1,8 +1,6 @@
 void setup() {
   pinMode (Knop_PIN, INPUT_PULLUP); //кнопка
-  pinMode (temp_PIN, OUTPUT); //18b20
- // digitalWrite(temp_PIN, LOW);
- digitalWrite(temp_PIN, HIGH);
+
   Install_Disp();
   
   Serial.begin(9600);  delay (100);
