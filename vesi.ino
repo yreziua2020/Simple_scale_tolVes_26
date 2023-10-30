@@ -32,10 +32,10 @@ void scale_ves(){
           if (!f_sav) {
             Serial.print(" запись");
             UserID=5;   //при обновлении дислплея выведит значение а ни вес
-            if (units>86000&&units<110000){  f_sav=1;  Serial.print("SQL "); UserID=1; bd_sql();}
+            if (units>86000&&units<120000){  f_sav=1;  Serial.print("SQL "); UserID=1; bd_sql();}
             if (units>71000&&units<85000) {  f_sav=1;  Serial.print("SQL "); UserID=2; bd_sql();}
             if (units>60000&&units<70000) {  f_sav=1;  Serial.print("SQL "); UserID=3; bd_sql();}
-            if (units>4200&&units<4400  ) {  f_sav=1;  Serial.print("SQL "); UserID=4; bd_sql();}
+            if (units>24000&&units<25000) {  f_sav=1;  Serial.print("SQL "); UserID=4; bd_sql();}
             if (!f_sav) {count_sav=0;}    //если не сработал не один вес то начинаем с начала
           }
         } 

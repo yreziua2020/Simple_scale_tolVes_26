@@ -8,7 +8,7 @@
 //test
 const byte  _Dclock = 0, _Dwifi = 0 ;
 
-//#define  ip_zna  //без комента 100 наполььные  с коментом 101
+#define  ip_zna  //без комента 100 наполььные  с коментом 101
 //#define  kalib  //ели роз кометировать то калибруем
 
 /*
@@ -32,8 +32,8 @@ IPAddress ip(192, 168, 1, 100);
 #else
 IPAddress ip(192, 168, 1, 101);
 #endif
-IPAddress gateway(192, 168, 1, 41);
-IPAddress primaryDNS(192, 168, 1, 41);  // опционально
+IPAddress gateway(192, 168, 1, 199);
+IPAddress primaryDNS(192, 168, 1, 199);  // опционально
 IPAddress subnet(255, 255, 255, 0);
 IPAddress secondaryDNS(8, 8, 8, 8);  // опционально
 const char* ssid = "home";
@@ -113,7 +113,7 @@ uint32_t wrem_Timer = 0;
 uint32_t clok_disp = 0;
 uint32_t sql_sav = millis();  //задержка на запись
 
-char name_all[][7] = { { "Serge" }, { "Yrij" }, { "Mami" }, { "Gant" }, { "Save" } };
+char name_all[][7] = { { "Serge" }, { "Yrij" }, { "Mami" }, { "Akum" }, { "Save" } };
 int32_t pred_uint;              //предыдущие значения веса
 uint16_t count_sav;             //счетчик до записи в SQL
 bool f_sav;                     //флаг записи
@@ -133,10 +133,10 @@ bool f_yark_d, f_yark_n;
 
 void loop() {
   
-   static unsigned long t_dht22 = millis();  //для отправки даных в sql
+   //static unsigned long t_dht22 = millis();  //для отправки даных в sql
 
      if (!f_yark_n && (h>21 || h<6)){f_yark_d=0;f_yark_n=1;matrix.setIntensity(0); Serial.print("яркость 0");  }
-    if (!f_yark_d && (h>=6 && h<=21)) {f_yark_n=0;f_yark_d=1;matrix.setIntensity(0); Serial.print("яркость 5");}        
+    if (!f_yark_d && (h>=6 && h<=21)) {f_yark_n=0;f_yark_d=6;matrix.setIntensity(0); Serial.print("яркость 5");}        
     ///if (!f_yark_d && (h>6 || h<20)){f_yark_n=0;f_yark_d=1;matrix.setIntensity(6); Serial.print("яркость 5");}   
    
 #ifdef ip_zna
