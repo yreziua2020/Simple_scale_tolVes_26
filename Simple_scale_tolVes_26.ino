@@ -2,15 +2,34 @@
 #include <ESP8266WebServer.h>         // Библиотека для управления устройством по HTTP (например из браузера)
 #include <ESP8266HTTPUpdateServer.h>  //не работает в хроме
 #include <HX711.h>
-#include <SPI.h>
+//#include <SPI.h>
 #include <Adafruit_GFX.h>
-#include <Max72xxPanel.h>
+//#include <Max72xxPanel.h>
+
+#include <MD_Parola.h>
+#include <MD_MAX72xx.h>
+#include <SPI.h>
+#include "Fonts.h"
+
+#define  MAX_DEVICES 4 
+#define CLK_PIN     D5 // or SCK
+#define DATA_PIN    D7 // or MOSI
+#define CS_PIN      D8 // or SS
+
+MD_Parola P = MD_Parola(CS_PIN, MAX_DEVICES);
+#define ARRAY_SIZE(x)  (sizeof(x)/sizeof(x[0]))
+
 //test
 const byte  _Dclock = 0, _Dwifi = 0 ;
 
-#define  ip_zna  //без комента 100 наполььные  с коментом 101
+
+
+
+//#define  ip_zna  //без комента 100 наполььные  с коментом 101
 //#define  kalib  //ели роз кометировать то калибруем
 
+
+#include "disp2.h"
 /*
 NodeMCU    -> Matrix
 MOSI-D7-GPIO13  -> DIN
@@ -67,11 +86,8 @@ int pinCS = 15;                      //2 Подключение пина CS
 int numberOfHorizontalDisplays = 4;  // Количество светодиодных матриц по Горизонтали
 int numberOfVerticalDisplays = 1;    // Количество светодиодных матриц по Вертикали
 //String decodedMsg;
-Max72xxPanel matrix = Max72xxPanel(pinCS, numberOfHorizontalDisplays, numberOfVerticalDisplays);
-//#define MAX_DIGITS 16
-//byte dig[MAX_DIGITS]={0};
-//byte digold[MAX_DIGITS]={0};
-//byte digtrans[MAX_DIGITS]={0};
+//Max72xxPanel matrix = Max72xxPanel(pinCS, numberOfHorizontalDisplays, numberOfVerticalDisplays);
+
 ///-----------------------------------------------------------------------------------------------
 ///-----------------------------------------------------------------------------------------------
 //экземпляр весов и назначение пинов
@@ -107,6 +123,44 @@ uint32_t btnTimer = 0;
 ///-----------------------------------------------------------------------------------------------
 ESP8266WebServer HTTP(80);
 ESP8266HTTPUpdateServer httpUpdater;
+//-------------------------------------------------------------------
+// Global data
+typedef struct
+{
+  textEffect_t  effect;   // text effect to display
+  char *        psz;      // text string nul terminated
+  uint16_t      speed;    // speed multiplier of library default
+  uint16_t      pause;    // pause multiplier for library default
+} sCatalog;
+
+sCatalog  catalog[] =
+{
+  { PA_SLICE, "SLICE", 1, 1 },
+  { PA_MESH, "MESH", 10, 1 },
+  { PA_FADE, "FADE", 20, 1 },
+  { PA_WIPE, "WIPE", 5, 1 },
+  { PA_WIPE_CURSOR, "WPE_C", 4, 1 },
+  { PA_OPENING, "OPEN", 3, 1 },
+  { PA_OPENING_CURSOR, "OPN_C", 4, 1 },
+  { PA_CLOSING, "CLOSE", 3, 1 },
+  { PA_CLOSING_CURSOR, "CLS_C", 4, 1 },
+  { PA_BLINDS, "BLIND", 7, 1 },
+  { PA_DISSOLVE, "DSLVE", 7, 1 },
+  { PA_SCROLL_UP, "SC_U", 5, 1 },
+  { PA_SCROLL_DOWN, "SC_D", 5, 1 },
+  { PA_SCROLL_LEFT, "SC_L", 5, 1 },
+  { PA_SCROLL_RIGHT, "SC_R", 5, 1 },
+  { PA_SCROLL_UP_LEFT, "SC_UL", 7, 1 },
+  { PA_SCROLL_UP_RIGHT, "SC_UR", 7, 1 },
+  { PA_SCROLL_DOWN_LEFT, "SC_DL", 7, 1 },
+  { PA_SCROLL_DOWN_RIGHT, "SC_DR", 7, 1 },
+  { PA_SCAN_HORIZ, "SCANH", 4, 1 },
+  { PA_SCAN_VERT, "SCANV", 3, 1 },
+  { PA_GROW_UP, "GRW_U", 7, 1 },
+  { PA_GROW_DOWN, "GRW_D", 7, 1 },
+};
+
+//-------------------------------------------------------------------------------------------------------------------------------
 
 //bool wrem;
 uint32_t wrem_Timer = 0;
@@ -135,8 +189,8 @@ void loop() {
   
    //static unsigned long t_dht22 = millis();  //для отправки даных в sql
 
-     if (!f_yark_n && (h>21 || h<6)){f_yark_d=0;f_yark_n=1;matrix.setIntensity(0); Serial.print("яркость 0");  }
-    if (!f_yark_d && (h>=6 && h<=21)) {f_yark_n=0;f_yark_d=6;matrix.setIntensity(0); Serial.print("яркость 5");}        
+   //  if (!f_yark_n && (h>21 || h<6)){f_yark_d=0;f_yark_n=1;matrix.setIntensity(0); Serial.print("яркость 0");  }
+  //  if (!f_yark_d && (h>=6 && h<=21)) {f_yark_n=0;f_yark_d=6;matrix.setIntensity(0); Serial.print("яркость 5");}        
     ///if (!f_yark_d && (h>6 || h<20)){f_yark_n=0;f_yark_d=1;matrix.setIntensity(6); Serial.print("яркость 5");}   
    
 #ifdef ip_zna
@@ -166,7 +220,7 @@ void loop() {
   HTTP.handleClient();
   delay(10);
   scale_ves();
-  Display();
+  //Display();
 
   clok(); 
 }
