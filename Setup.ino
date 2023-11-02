@@ -10,15 +10,18 @@ void setup() {
   P.setZoneEffect(0,true,PA_FLIP_UD);
   P.setZoneEffect(0,true,PA_FLIP_LR);
  // P.setSpeed(1000) ;
-/*
-{
+
+{ //P.getSpeed()=10 ВСЕГДА
   for (uint8_t i=0; i<ARRAY_SIZE(catalog); i++)
   {
+    Serial.print("P.getSpeed()="); Serial.println(P.getSpeed());
     catalog[i].speed *= P.getSpeed();
     catalog[i].pause *= 500;
   }
 }
-*/
+
+
+
 
 
   Serial.begin(115200);  delay (100);

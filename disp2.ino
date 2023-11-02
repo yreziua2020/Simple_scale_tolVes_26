@@ -20,19 +20,20 @@ void Display() {
     chis5 = String((s/ 10) % 10);
     chis6 = String(s % 10);
     
-   if (disp==2) {rnd = random(0, ARRAY_SIZE(catalog));}
-     Text =  chis1 +chis2+  ":" + chis3+chis4 ;
+   //if (disp==0) {rnd = random(0, ARRAY_SIZE(catalog));}
+   Text =  chis1 +chis2+  ":" + chis3+chis4 ;
 
-  
-
-     if (P.displayAnimate()){
+     if (P.displayAnimate()){  //истина анимации нет
+    rnd = random(0, ARRAY_SIZE(catalog));
     utf8rus(Text).toCharArray(buf, 256);
-    disp=0;
+    //disp=1;
     //P.displayText(buf, PA_CENTER, catalog[rnd].speed, 5000, catalog[rnd].effect, catalog[rnd].effect);   
-  P.displayText(buf, PA_CENTER, 0, 5000, catalog[rnd].effect, catalog[rnd].effect);   
+    P.displayText(buf, PA_CENTER, 100, 5000, catalog[rnd].effect, catalog[rnd].effect);   
 
-    if (!P.displayAnimate())  {disp = 2;Serial.print("Text=");Serial.println(Text);}
+    //if (!P.displayAnimate())  {disp = 2;Serial.print("Text=");Serial.println(Text);}
     }
+
+
     
   }
 
