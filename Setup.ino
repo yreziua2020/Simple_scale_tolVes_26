@@ -9,13 +9,25 @@ void setup() {
   P.setIntensity(0);
   P.setZoneEffect(0,true,PA_FLIP_UD);
   P.setZoneEffect(0,true,PA_FLIP_LR);
-  Serial.begin(9600);  delay (100);
+ // P.setSpeed(1000) ;
+/*
+{
+  for (uint8_t i=0; i<ARRAY_SIZE(catalog); i++)
+  {
+    catalog[i].speed *= P.getSpeed();
+    catalog[i].pause *= 500;
+  }
+}
+*/
+
+
+  Serial.begin(115200);  delay (100);
   
   scale_istall();
   
 P.print("helo");
 
-delay(2000);
+delay(1000);
 
   WiFi.begin(ssid, password);   WiFi.config(ip, gateway, subnet, primaryDNS, secondaryDNS);
   while (WiFi.status() != WL_CONNECTED) { delay(300);Serial.print("."); if(raz_podk++>250){ESP.reset(); }}  

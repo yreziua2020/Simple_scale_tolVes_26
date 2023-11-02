@@ -11,6 +11,8 @@
 #include <SPI.h>
 #include "Fonts.h"
 
+//#include "disp2.h"
+
 #define  MAX_DEVICES 4 
 #define CLK_PIN     D5 // or SCK
 #define DATA_PIN    D7 // or MOSI
@@ -19,17 +21,18 @@
 MD_Parola P = MD_Parola(CS_PIN, MAX_DEVICES);
 #define ARRAY_SIZE(x)  (sizeof(x)/sizeof(x[0]))
 
+String Text;
+char buf[256];
+int disp=0;
+int rnd;
+int lp=0;
+
 //test
 const byte  _Dclock = 0, _Dwifi = 0 ;
-
-
-
 
 //#define  ip_zna  //без комента 100 наполььные  с коментом 101
 //#define  kalib  //ели роз кометировать то калибруем
 
-
-#include "disp2.h"
 /*
 NodeMCU    -> Matrix
 MOSI-D7-GPIO13  -> DIN
@@ -51,8 +54,8 @@ IPAddress ip(192, 168, 1, 100);
 #else
 IPAddress ip(192, 168, 1, 101);
 #endif
-IPAddress gateway(192, 168, 1, 199);
-IPAddress primaryDNS(192, 168, 1, 199);  // опционально
+IPAddress gateway(192, 168, 1, 41);
+IPAddress primaryDNS(192, 168, 1, 41);  // опционально
 IPAddress subnet(255, 255, 255, 0);
 IPAddress secondaryDNS(8, 8, 8, 8);  // опционально
 const char* ssid = "home";
@@ -200,7 +203,7 @@ void loop() {
   if (units > -10 && units < 10 )  
   {
 #endif
-      if ((millis()-clok_timer) > 30000)  { clok_timer = millis();  f_clok_D = 1; Serial.print("f_clok_D=1");}
+      if ((millis()-clok_timer) > 8000)  { clok_timer = millis();  P.displayClear();  f_clok_D = 1; Serial.print("f_clok_D=1");}
       tara_timer = millis();
    } 
    else
@@ -220,7 +223,7 @@ void loop() {
   HTTP.handleClient();
   delay(10);
   scale_ves();
-  //Display();
+  Display();
 
   clok(); 
 }

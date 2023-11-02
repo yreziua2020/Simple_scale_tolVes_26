@@ -7,7 +7,7 @@ void scale_ves(){
  #ifdef ip_zna
   delay(1);
  #else
-  delay(500);
+  delay(3);
 #endif 
   //ounces = scale.get_units(10);// получаем значение с датчика, усреднённое по 10 измерениям
  //scale.power_down();
@@ -19,7 +19,7 @@ void scale_ves(){
  // units_int =round(units);
 
    //Serial.print("Вес предыдущий: ");   Serial.print(pred_uint); 
-   Serial.print(" Вес int: ");   Serial.println(units);
+   //Serial.print(" Вес int: ");   Serial.println(units);
   
   if (units >1000)  {
     uint16_t raz= abs(pred_uint-units);
