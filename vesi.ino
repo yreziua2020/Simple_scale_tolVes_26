@@ -2,12 +2,18 @@ void scale_ves(){
 #ifdef kalib
  Serial.print("Калибровка ");
 #else 
-  scale.power_up();
-  float ounces = scale.get_units(10);// получаем значение с датчика, усреднённое по 10 измерениям
+ 
+   if ( (millis()-zader_vesi) > 250 ) { zader_vesi=millis();
+
+  //scale.power_up();
+  float ounces;
+   if (f_clok_D) { ounces = scale.get_units(1);}
+  else { ounces = scale.get_units(10);}// получаем значение с датчика, усреднённое по 10 измерениям
+
  #ifdef ip_zna
   delay(1);
  #else
-  delay(3);
+  delay(1);
 #endif 
   //ounces = scale.get_units(10);// получаем значение с датчика, усреднённое по 10 измерениям
  //scale.power_down();
@@ -15,11 +21,12 @@ void scale_ves(){
   //units = units+ 3800; //округление до ближайшего целого и условное тарирование
 
 
-  units = round(units); //округление до ближайшего целого и условное тарирование
+ // units = round(units); //округление до ближайшего целого и условное тарирование
  // units_int =round(units);
 
    //Serial.print("Вес предыдущий: ");   Serial.print(pred_uint); 
-   //Serial.print(" Вес int: ");   Serial.println(units);
+  
+  // Serial.print(" Вес int: ");   Serial.println(units);
   
   if (units >1000)  {
     uint16_t raz= abs(pred_uint-units);
@@ -44,7 +51,8 @@ void scale_ves(){
         pred_uint=units;
 
   }  else {pred_uint=0; f_sav=0;count_sav=0;/*Serial.print("обнулить2");*/}
- 
+
+ } //if  (millis()-zader_vesi)
 // Serial.println("");
 
 #endif

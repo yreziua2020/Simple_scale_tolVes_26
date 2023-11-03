@@ -182,6 +182,7 @@ int32_t clok_timer = millis();  //задержка для отображение
 uint16_t z_clok;                  //  задержка отображение часов
 uint16_t z_tara;                  //  задержка обнуленин тары
 int32_t tara_timer = millis();  //задержка для отображение часов
+int32_t zader_vesi = millis();  //задержка для dpdtisdfybq
 bool f_clok_D;                  //флаг отображение часов на дисплее
 bool f_sek;                  //флаг отображение двое точее мигания на дисплее
 
@@ -206,7 +207,7 @@ void loop() {
   if (units > -10 && units < 10 )  
   {
 #endif
-      if ((millis()-clok_timer) > 8000)  { clok_timer = millis();  P.displayClear();  f_clok_D = 1; /*Serial.print("f_clok_D=1");*/}
+      if ((millis()-clok_timer) > 13000)  { clok_timer = millis();    f_clok_D = 1; Serial.print("f_clok_D=1");}   //P.displayClear();
       tara_timer = millis();
    } 
    else

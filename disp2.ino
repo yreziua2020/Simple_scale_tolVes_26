@@ -9,7 +9,7 @@
 void Display() {
 //delay(2000);
 
-f_clok_D=1;
+
   if (f_clok_D) {
     int y = 0;  // Центрируем текст по Вертикали
     String chis1, chis2, chis3, chis4, chis5, chis6;
@@ -23,24 +23,54 @@ f_clok_D=1;
     chis6 = String(s % 10);
     
    //if (disp==0) {rnd = random(0, ARRAY_SIZE(catalog));}
-   Text =  chis3 +chis4+  ":"+ chis5+chis6  ;
+   Text =  chis1 +chis2+  ":"+ chis3+chis4  ;
 
      if (P.displayAnimate()){  //истина анимации нет
     rnd = random(0, ARRAY_SIZE(catalog));
     utf8rus(Text).toCharArray(buf, 256);
     //disp=1;
     //P.displayText(buf, PA_CENTER, catalog[rnd].speed, 5000, catalog[rnd].effect, catalog[rnd].effect);   
-    Serial.println(Text);
+    //Serial.println(Text);
     //P.displayText(buf, PA_CENTER, catalog[rnd].speed, 5000, catalog[rnd].effect, catalog[rnd].effect);  
-    //P.displayText(buf, PA_CENTER, catalog[rnd].speed, 5000, catalog[rnd].effect, catalog[rnd].effect);    
-    P.displayText(buf, PA_CENTER, 10, 5000, PA_SLICE, PA_SLICE);    
-    delay(100);
+    P.displayText(buf, PA_CENTER, catalog[rnd].speed, 3000, catalog[rnd].effect, catalog[rnd].effect);    
+    //P.displayText(buf, PA_CENTER, 10, 5000, PA_SLICE, PA_SLICE);    
+    delay(10);
     //if (!P.displayAnimate())  {disp = 2;Serial.print("Text=");Serial.println(Text);}
     }
 
-
     
+  } 
+  else {
+   if (units>1000){
+     float tpm ;
+    tpm =units/1000;
+    Serial.println ("units/1000==;");Serial.println (tpm);
+    Text =  units/1000;
+    utf8rus(Text).toCharArray(buf, 256);
+    P.write(buf);
+    } 
+    
+    else if (units>100){
+    Text = (int) units;
+    utf8rus(Text).toCharArray(buf, 256);
+    P.write(buf);
+    } 
+    else
+    {
+    Text =  units;
+    utf8rus(Text).toCharArray(buf, 256);
+    P.write(buf);
+    }
+
+/*  
+     if (P.displayAnimate()){  //истина анимации нет
+    P.displayText(buf, PA_CENTER, catalog[2].speed, 500, catalog[2].effect, catalog[2].effect);
+    delay(10);
+     }
+*/
+
   }
+
 
 
 }
