@@ -203,7 +203,7 @@ void loop() {
   if (units > -10 && units < 10 )  
   {
 #endif
-      if ((millis()-clok_timer) > 8000)  { clok_timer = millis();  P.displayClear();  f_clok_D = 1; Serial.print("f_clok_D=1");}
+      if ((millis()-clok_timer) > 8000)  { clok_timer = millis();  P.displayClear();  f_clok_D = 1; /*Serial.print("f_clok_D=1");*/}
       tara_timer = millis();
    } 
    else

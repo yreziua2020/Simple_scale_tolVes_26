@@ -28,7 +28,7 @@ void setup() {
   
   scale_istall();
   
-P.print("helo");
+//P.print("helo");
 
 delay(1000);
 
