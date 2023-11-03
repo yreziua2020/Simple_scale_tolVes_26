@@ -12,13 +12,14 @@
 #include "Fonts.h"
 
 //#include "disp2.h"
+#define HARDWARE_TYPE MD_MAX72XX::FC16_HW
 
 #define  MAX_DEVICES 4 
-#define CLK_PIN     D5 // or SCK
-#define DATA_PIN    D7 // or MOSI
-#define CS_PIN      D8 // or SS
+//#define CLK_PIN     D5 // or SCK
+//#define DATA_PIN    D7 // or MOSI
+#define CS_PIN      15 //D8 // or SS
 
-MD_Parola P = MD_Parola(CS_PIN, MAX_DEVICES);
+MD_Parola P = MD_Parola(HARDWARE_TYPE, CS_PIN, MAX_DEVICES);
 #define ARRAY_SIZE(x)  (sizeof(x)/sizeof(x[0]))
 
 String Text;
@@ -162,7 +163,9 @@ sCatalog  catalog[] =
   { PA_GROW_UP, "GRW_U", 7, 1 },
   { PA_GROW_DOWN, "GRW_D", 7, 1 },
 };
-
+extern "C" {
+#include "user_interface.h"
+}
 //-------------------------------------------------------------------------------------------------------------------------------
 
 //bool wrem;
