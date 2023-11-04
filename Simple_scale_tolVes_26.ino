@@ -1,4 +1,7 @@
 //ver 0411 9:02
+#define  ip_zna  //без комента 100 наполььные  с коментом 101
+//#define  kalib  //ели роз кометировать то калибруем
+
 #include <ESP8266WiFi.h>              // Библиотека для создания Wi-Fi подключения (клиент или точка доступа)
 #include <ESP8266WebServer.h>         // Библиотека для управления устройством по HTTP (например из браузера)
 #include <ESP8266HTTPUpdateServer.h>  //не работает в хроме
@@ -32,8 +35,7 @@ int lp=0;
 //test
 const byte  _Dclock = 0, _Dwifi = 0 ;
 
-//#define  ip_zna  //без комента 100 наполььные  с коментом 101
-//#define  kalib  //ели роз кометировать то калибруем
+
 
 /*
 NodeMCU    -> Matrix
@@ -197,8 +199,8 @@ void loop() {
   
    //static unsigned long t_dht22 = millis();  //для отправки даных в sql
 
-   //  if (!f_yark_n && (h>21 || h<6)){f_yark_d=0;f_yark_n=1;matrix.setIntensity(0); Serial.print("яркость 0");  }
-  //  if (!f_yark_d && (h>=6 && h<=21)) {f_yark_n=0;f_yark_d=6;matrix.setIntensity(0); Serial.print("яркость 5");}        
+    if (!f_yark_n && (h>21 || h<6)){f_yark_d=0;f_yark_n=1;P.setIntensity(0); Serial.print("яркость 0");  }
+    if (!f_yark_d && (h>=6 && h<=21)) {f_yark_n=0;f_yark_d=6;P.setIntensity(6); Serial.print("яркость 5");}        
     ///if (!f_yark_d && (h>6 || h<20)){f_yark_n=0;f_yark_d=1;matrix.setIntensity(6); Serial.print("яркость 5");}   
    
 #ifdef ip_zna
@@ -208,7 +210,7 @@ void loop() {
   if (units > -10 && units < 10 )  
   {
 #endif
-      if ((millis()-clok_timer) > 13000)  { clok_timer = millis();    f_clok_D = 1; Serial.print("f_clok_D=1");}   //P.displayClear();
+      if ((millis()-clok_timer) > 13000)  { clok_timer = millis();    f_clok_D = 1; /*Serial.print("f_clok_D=1");*/}   //P.displayClear();
       tara_timer = millis();
    } 
    else

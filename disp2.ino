@@ -41,25 +41,39 @@ void Display() {
     
   } 
   else {
-   if (units>1000){
-     float tpm ;
+    P.setTextAlignment(PA_LEFT);
+      float tpm ;
+    if (units>100000){
+      
+      tpm =units/1000;
+      P.print(tpm,1);
+    }
+   else if (units>1000){
+     
     tpm =units/1000;
-    Serial.println ("units/1000==;");Serial.println (tpm);
-    Text =  units/1000;
-    utf8rus(Text).toCharArray(buf, 256);
-    P.write(buf);
+   // Serial.println ("units/1000==;");Serial.println (tpm);
+    //Text =  units/1000;
+   // utf8rus(Text).toCharArray(buf, 256);
+    //P.write(buf);
+    P.print(tpm,1);
     } 
     
     else if (units>100){
-    Text = (int) units;
-    utf8rus(Text).toCharArray(buf, 256);
-    P.write(buf);
+    //Text = (int) units;
+    //utf8rus(Text).toCharArray(buf, 256);
+    //P.write(buf);
+    P.print(units,1);
+   // P.print(buf);
     } 
     else
     {
-    Text =  units;
-    utf8rus(Text).toCharArray(buf, 256);
-    P.write(buf);
+    //Text = units;
+    //Text = ((float)((int)(units*10))/10);
+    //Serial.println("Text=");Serial.println(Text);
+
+    //utf8rus(Text).toCharArray(buf, 256);
+    P.print(units,1);
+    //P.write(buf);
     }
 
 /*  

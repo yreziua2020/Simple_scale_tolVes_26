@@ -3,7 +3,7 @@ void scale_ves(){
  Serial.print("Калибровка ");
 #else 
  
-   if ( (millis()-zader_vesi) > 250 ) { zader_vesi=millis();
+   if ( (millis()-zader_vesi) > 350 ) { zader_vesi=millis();
 
   //scale.power_up();
   float ounces;
@@ -21,7 +21,7 @@ void scale_ves(){
   //units = units+ 3800; //округление до ближайшего целого и условное тарирование
 
 
- // units = round(units); //округление до ближайшего целого и условное тарирование
+  units = round(units); //округление до ближайшего целого и условное тарирование
  // units_int =round(units);
 
    //Serial.print("Вес предыдущий: ");   Serial.print(pred_uint); 
@@ -37,7 +37,7 @@ void scale_ves(){
         else
         { 
           if (!f_sav) {
-            Serial.print(" запись");
+            Serial.println(" запись");
             UserID=5;   //при обновлении дислплея выведит значение а ни вес
             if (units>86000&&units<120000){  f_sav=1;  Serial.print("SQL "); UserID=1; bd_sql();}
             if (units>71000&&units<85000) {  f_sav=1;  Serial.print("SQL "); UserID=2; bd_sql();}
