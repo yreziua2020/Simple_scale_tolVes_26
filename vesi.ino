@@ -3,30 +3,19 @@ void scale_ves(){
  Serial.print("Калибровка ");
 #else 
  
-   if ( (millis()-zader_vesi) > 350 ) { zader_vesi=millis();
+   if ( (millis()-zader_vesi) > z_ves__vzvech ) { zader_vesi=millis();
 
   //scale.power_up();
   float ounces;
    if (f_clok_D) { ounces = scale.get_units(1);}
   else { ounces = scale.get_units(10);}// получаем значение с датчика, усреднённое по 10 измерениям
-/*
- #ifdef ip_zna
-  delay(1);
- #else
-  delay(1);
-#endif 
-*/
-  //ounces = scale.get_units(10);// получаем значение с датчика, усреднённое по 10 измерениям
+
  //scale.power_down();
    units = ounces * 0.035274;  // переводим вес из унций в граммы
   //units = units+ 3800; //округление до ближайшего целого и условное тарирование
-
-
   units = round(units); //округление до ближайшего целого и условное тарирование
  // units_int =round(units);
-
    //Serial.print("Вес предыдущий: ");   Serial.print(pred_uint); 
-  
   // Serial.print(" Вес int: ");   Serial.println(units);
   
   if (units >1000)  {
