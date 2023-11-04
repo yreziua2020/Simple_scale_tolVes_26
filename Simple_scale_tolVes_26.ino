@@ -1,4 +1,4 @@
-//ver 0311
+//ver 0411 9:02
 #include <ESP8266WiFi.h>              // Библиотека для создания Wi-Fi подключения (клиент или точка доступа)
 #include <ESP8266WebServer.h>         // Библиотека для управления устройством по HTTP (например из браузера)
 #include <ESP8266HTTPUpdateServer.h>  //не работает в хроме
@@ -56,8 +56,8 @@ IPAddress ip(192, 168, 1, 100);
 #else
 IPAddress ip(192, 168, 1, 101);
 #endif
-IPAddress gateway(192, 168, 1, 41);
-IPAddress primaryDNS(192, 168, 1, 41);  // опционально
+IPAddress gateway(192, 168, 1, 199);
+IPAddress primaryDNS(192, 168, 1, 199);  // опционально
 IPAddress subnet(255, 255, 255, 0);
 IPAddress secondaryDNS(8, 8, 8, 8);  // опционально
 const char* ssid = "home";
