@@ -9,12 +9,13 @@ void scale_ves(){
   float ounces;
    if (f_clok_D) { ounces = scale.get_units(1);}
   else { ounces = scale.get_units(10);}// получаем значение с датчика, усреднённое по 10 измерениям
-
+/*
  #ifdef ip_zna
   delay(1);
  #else
   delay(1);
 #endif 
+*/
   //ounces = scale.get_units(10);// получаем значение с датчика, усреднённое по 10 измерениям
  //scale.power_down();
    units = ounces * 0.035274;  // переводим вес из унций в граммы
@@ -42,7 +43,8 @@ void scale_ves(){
             if (units>86000&&units<120000){  f_sav=1;  Serial.print("SQL "); UserID=1; bd_sql();}
             if (units>71000&&units<85000) {  f_sav=1;  Serial.print("SQL "); UserID=2; bd_sql();}
             if (units>60000&&units<70000) {  f_sav=1;  Serial.print("SQL "); UserID=3; bd_sql();}
-            if (units>24000&&units<25000) {  f_sav=1;  Serial.print("SQL "); UserID=4; bd_sql();}
+            if (units>20000&&units<23000) {  f_sav=1;  Serial.print("SQL "); UserID=4; bd_sql();}
+           // if (units>1700&&units<1900)   {  f_sav=1;  Serial.print("SQL ");  UserID=4; /*bd_sql();*/}
             if (!f_sav) {count_sav=0;}    //если не сработал не один вес то начинаем с начала
           }
         } 

@@ -1,4 +1,4 @@
-//ver 0411 9:02
+//ver 0411 18:28
 #define  ip_zna  //без комента 100 наполььные  с коментом 101
 //#define  kalib  //ели роз кометировать то калибруем
 
@@ -101,6 +101,7 @@ int numberOfVerticalDisplays = 1;    // Количество светодиод�
 HX711 scale;
 const int DT_PIN = 4;   //12;  //D6
 const int SCK_PIN = 5;  //14; //D5
+float units;
 #ifdef kalib
   //калибровочные дела (раскомментить для настройки)
 float weight_of_standard = 2206.0;  // эталонный вес
@@ -108,15 +109,19 @@ float conversion_rate = 0.035274;   //коэффициент перевода и
 const int z = 100;                  // количество измерений, по которым будет найдено среднее значение
 float calibration_value[z];         // массив для хранения считанных значений
 float calibration_factor = 0;
-float units;
+//float units;
 #else
+
   //float calibration_factor =0.7846986701;
 #ifdef ip_zna
 float calibration_factor = 0.80;  //для на польных -13.77
+uint16_t z_ves__vzvech=350; //задержка звешываний для разных весов разная 
 #else
 float calibration_factor = -13.77;  //для на польных -13.77
+uint16_t z_ves__vzvech=0; //задержка звешываний для разных весов разная 
 #endif
-float units;
+//float units;
+
 #endif
 ///-----------------------------------------------------------------------------------------------
 ///-----------------------------------------------------------------------------------------------
@@ -176,7 +181,8 @@ uint32_t wrem_Timer = 0;
 uint32_t clok_disp = 0;
 uint32_t sql_sav = millis();  //задержка на запись
 
-char name_all[][7] = { { "Serge" }, { "Yrij" }, { "Mami" }, { "Akum" }, { "Save" } };
+//char name_all[][7] = { { "Serge" }, { "Yrij" }, { "Mami" }, { "Akum" }, { "Save" } };
+char *name_all[] = {  "Серге" ,  "Юрий" , "Мамик" ,  "Аккам" ,  "Неизв"  };
 int32_t pred_uint;              //предыдущие значения веса
 uint16_t count_sav;             //счетчик до записи в SQL
 bool f_sav;                     //флаг записи
@@ -193,24 +199,24 @@ bool f_sek;                  //флаг отображение двое точе
 bool f_yark_d, f_yark_n;
 
 
-
-
 void loop() {
-  
-   //static unsigned long t_dht22 = millis();  //для отправки даных в sql
-
-    if (!f_yark_n && (h>21 || h<6)){f_yark_d=0;f_yark_n=1;P.setIntensity(0); Serial.print("яркость 0");  }
-    if (!f_yark_d && (h>=6 && h<=21)) {f_yark_n=0;f_yark_d=6;P.setIntensity(6); Serial.print("яркость 5");}        
-    ///if (!f_yark_d && (h>6 || h<20)){f_yark_n=0;f_yark_d=1;matrix.setIntensity(6); Serial.print("яркость 5");}   
+    if (!f_yark_n && (h>22 || h<6)){f_yark_d=0;f_yark_n=1;P.setIntensity(0); Serial.print("яркость 0");  }  //яркость ночью
    
 #ifdef ip_zna
+  if (!f_yark_d && (h>=6 && h<=22)) {f_yark_n=0;f_yark_d=6;P.setIntensity(6); Serial.print("яркость 5");}  
   if (units > -100 && units < 100 ) 
   {
-#else 
+#else
+  if (!f_yark_d && (h>=6 && h<=21)) {f_yark_n=0;f_yark_d=6;P.setIntensity(0); Serial.print("яркость 0");}   
   if (units > -10 && units < 10 )  
   {
 #endif
-      if ((millis()-clok_timer) > 13000)  { clok_timer = millis();    f_clok_D = 1; /*Serial.print("f_clok_D=1");*/}   //P.displayClear();
+      if ((millis()-clok_timer) > 35000)  { 
+            clok_timer = millis();    
+            f_clok_D = 1; 
+            Serial.print("f_clok_D=1");
+            P.displayClear();
+            }   //P.displayClear();
       tara_timer = millis();
    } 
    else
@@ -219,9 +225,7 @@ void loop() {
        {
           tara_timer = millis();
           //Serial.print("z_tara=");Serial.println(z_tara);
-          if (units <100) {scale.tare();  Serial.print("Тара обнулилась"); } 
-          else {Serial.print("Тара обнуления не было");}
-         
+          if (units <100) {scale.tare();  Serial.print("Тара обнулилась"); }     else {Serial.print("не было обнуления Тары");}
        }  
      f_clok_D = 0;
      clok_timer = millis(); 
@@ -231,6 +235,5 @@ void loop() {
   delay(10);
   scale_ves();
   Display();
-
   clok(); 
 }
