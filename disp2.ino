@@ -38,6 +38,7 @@ void Display() {
     }  //if (UserID == 0) 
     else {
         if (UserID == 1 || UserID == 2 || UserID == 3 || UserID == 4 || UserID == 5) {  ///4 -это save
+           P.setTextAlignment(PA_CENTER);
            Text =  name_all[UserID-1];
            utf8rus(Text).toCharArray(buf, 256);
            P.write(buf);
@@ -46,6 +47,16 @@ void Display() {
         }
     }  //else {
   }   // else if (f_clok_D) {
+
+
+    if (f_eror_sql) {
+       P.setTextAlignment(PA_CENTER);
+      Text =  name_all[5];
+      utf8rus(Text).toCharArray(buf, 256);
+      P.write(buf);
+      delay(2000);
+      f_eror_sql=0;
+    }
 
 
 }  //void Display() {

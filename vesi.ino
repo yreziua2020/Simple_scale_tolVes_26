@@ -32,8 +32,14 @@ void scale_ves(){
             if (units>86000&&units<120000){  f_sav=1;  Serial.print("SQL "); UserID=1; bd_sql();}
             if (units>71000&&units<85000) {  f_sav=1;  Serial.print("SQL "); UserID=2; bd_sql();}
             if (units>60000&&units<70000) {  f_sav=1;  Serial.print("SQL "); UserID=3; bd_sql();}
+#ifdef ip_zna
             if (units>20000&&units<23000) {  f_sav=1;  Serial.print("SQL "); UserID=4; bd_sql();}
-           // if (units>1700&&units<1900)   {  f_sav=1;  Serial.print("SQL ");  UserID=4; /*bd_sql();*/}
+#else
+           if (units>1700&&units<1900)   {  f_sav=1;  Serial.print("SQL ");  UserID=4; /*bd_sql();*/}
+         //   if (units>1700&&units<1900)   {  f_sav=1;  Serial.print("SQL ");  UserID=4; bd_sql();}
+#endif
+            
+           
             if (!f_sav) {count_sav=0;}    //если не сработал не один вес то начинаем с начала
           }
         } 
