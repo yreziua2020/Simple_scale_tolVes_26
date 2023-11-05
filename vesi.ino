@@ -3,7 +3,7 @@ void scale_ves(){
  Serial.print("Калибровка ");
 #else 
  
-   if ( (millis()-zader_vesi) > z_ves__vzvech ) { zader_vesi=millis();
+   if ( (millis()-zader_vesi) > 350 ) { zader_vesi=millis();
 
   //scale.power_up();
   float ounces;
