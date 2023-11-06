@@ -1,6 +1,6 @@
 //ver 0411 18:28
 
-#define  ip_zna  //без комента 100 наполььные  с коментом 101
+#define  ip_zna  //без комента 100 наполььные  если за коментировать то 101
 //#define  kalib  //ели роз кометировать то калибруем
 
 #include <ESP8266WiFi.h>              // Библиотека для создания Wi-Fi подключения (клиент или точка доступа)
@@ -222,7 +222,7 @@ void loop() {
        {
           tara_timer = millis();
           //Serial.print("z_tara=");Serial.println(z_tara);
-          if (units <100) {scale.tare();  Serial.print("Тара обнулилась"); }     else {Serial.print("не было обнуления Тары");}
+          if (units <200) {scale.tare();  Serial.print("Тара обнулилась"); }     else {Serial.print("не было обнуления Тары");}
        }  
      f_clok_D = 0;
      clok_timer = millis(); 
