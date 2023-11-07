@@ -35,7 +35,7 @@ void scale_ves(){
 #ifdef ip_zna
             if (units>20000&&units<23000) {  f_sav=1;  Serial.print("SQL "); UserID=4; bd_sql();}
 #else
-           if (units>1700&&units<1900)   {  f_sav=1;  Serial.print("SQL ");  UserID=4; /*bd_sql();*/}
+           if (units>1400&&units<1900)   {  f_sav=1;  Serial.print("No SQL ");  UserID=4; /*bd_sql();*/}
          //   if (units>1700&&units<1900)   {  f_sav=1;  Serial.print("SQL ");  UserID=4; bd_sql();}
 #endif
             

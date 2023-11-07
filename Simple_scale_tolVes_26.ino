@@ -1,6 +1,6 @@
-//ver 0711 8:38
+//ver 0711 8:45
 
-#define  ip_zna  //без комента 100 наполььные  если за коментировать то 101
+//#define  ip_zna  //без комента 100 наполььные  если за коментировать то 101
 //#define  kalib  //ели роз кометировать то калибруем
 
 #include <ESP8266WiFi.h>              // Библиотека для создания Wi-Fi подключения (клиент или точка доступа)
@@ -179,7 +179,7 @@ uint32_t clok_disp = 0;
 uint32_t sql_sav = millis();  //задержка на запись
 
 //char name_all[][7] = { { "Serge" }, { "Yrij" }, { "Mami" }, { "Akum" }, { "Save" } };
-char *name_all[] = {  "Серге" ,  "Юрий" , "Мамик" ,  "Аккам" ,  "Неизв" , "Ошибк"  };
+char *name_all[] = {  "Сергей" ,  "Юрий" , "Мамик" ,  " Аккамулятор" ,  "Неизвестно" , "Ошибк"  };
 int32_t pred_uint;              //предыдущие значения веса
 uint16_t count_sav;             //счетчик до записи в SQL
 bool f_sav;                     //флаг записи
@@ -222,7 +222,7 @@ void loop() {
        {
           tara_timer = millis();
           //Serial.print("z_tara=");Serial.println(z_tara);
-          if (units <200) {scale.tare();  Serial.print("Тара обнулилась"); }     else {Serial.print("не было обнуления Тары");}
+          if (units <200) {scale.tare();  Serial.println("Тара обнулилась"); }     else {Serial.println("не было обнуления Тары");}
        }  
      f_clok_D = 0;
      clok_timer = millis(); 
@@ -232,5 +232,5 @@ void loop() {
   delay(10);
   scale_ves();
   Display();
-  clok(); 
+  //clok(); 
 }

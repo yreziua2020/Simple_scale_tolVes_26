@@ -24,25 +24,58 @@ void Display() {
   }   //if (f_clok_D) {
   else 
   {
-     if (UserID == 0) {  
+     if (UserID == 0) {  //если равен нулю то показываем вес
         P.setTextAlignment(PA_LEFT);
         float tpm ;
-        if (units>1000){
+       // units=units+10000;
+      if (units>10000){
           tpm =units/1000;
-          P.print(tpm,2);
+
+          Text=(String)(tpm );  //сначала в int чтобы избавиться от значениий после запятой а потом String
+          utf8rus(Text).toCharArray(buf, 256);
+           P.write(buf);
+           //P.print(tpm,3);
+
         } 
-        else if (units>100){
-          P.print(units,1);
+        else if (units>1000){
+          tpm =units/1000;
+
+          Text=(String)(tpm )+"кг";  //сначала в int чтобы избавиться от значениий после запятой а потом String
+          utf8rus(Text).toCharArray(buf, 256);
+           P.write(buf);
+           //P.print(tpm,3);
+
         } 
-        else {P.print(units,0);  }
+        else if (units>-100) {
+          Text=(String)((int)units)+"гр";  //сначала в int чтобы избавиться от значениий после запятой а потом String
+          //char  tmp5=  "units+";
+          //P.print(units,0);  }
+          utf8rus(Text).toCharArray(buf, 256);
+          //P.print(units,0); 
+            P.write(buf);
+          
+         } 
+         else {
+          Text=(String)((int)units)+"г";  //сначала в int чтобы избавиться от значениий после запятой а потом String
+          utf8rus(Text).toCharArray(buf, 256);
+          P.write(buf);
+         }
+
+
     }  //if (UserID == 0) 
     else {
         if (UserID == 1 || UserID == 2 || UserID == 3 || UserID == 4 || UserID == 5) {  ///4 -это save
            P.setTextAlignment(PA_CENTER);
            Text =  name_all[UserID-1];
+           // Text="Привет мир так долго небыло тебя";
            utf8rus(Text).toCharArray(buf, 256);
-           P.write(buf);
-           delay(2000);
+          // P.write(buf);
+           P.displayScroll(buf,PA_LEFT, PA_SCROLL_RIGHT, 40);
+           Serial.println("влет в UserID ");
+           delay(500);
+           while (!P.displayAnimate()){delay(1);}; // delay(1) -для того чтоб не сработал WDT
+        
+          
            UserID = 0;
         }
     }  //else {
@@ -53,7 +86,10 @@ void Display() {
        P.setTextAlignment(PA_CENTER);
       Text =  name_all[5];
       utf8rus(Text).toCharArray(buf, 256);
+
       P.write(buf);
+
+
       delay(2000);
       f_eror_sql=0;
     }
