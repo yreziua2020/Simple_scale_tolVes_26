@@ -25,7 +25,7 @@ void Display() {
   else 
   {
      if (UserID == 0) {  //если равен нулю то показываем вес
-        P.setTextAlignment(PA_LEFT);
+        P.setTextAlignment(PA_CENTER);
         float tpm ;
        // units=units+10000;
       if (units>10000){
