@@ -1,6 +1,6 @@
-//ver 0711 8:45
+//ver 0711 20:52
 
-//#define  ip_zna  //без комента 100 наполььные  если за коментировать то 101
+#define  ip_zna  //без комента 100 наполььные  если за коментировать то 101
 //#define  kalib  //ели роз кометировать то калибруем
 
 #include <ESP8266WiFi.h>              // Библиотека для создания Wi-Fi подключения (клиент или точка доступа)
@@ -57,8 +57,8 @@ IPAddress ip(192, 168, 1, 100);
 #else
 IPAddress ip(192, 168, 1, 101);
 #endif
-IPAddress gateway(192, 168, 1, 41);
-IPAddress primaryDNS(192, 168, 1, 41);  // опционально
+IPAddress gateway(192, 168, 1, 199);
+IPAddress primaryDNS(192, 168, 1, 199);  // опционально
 IPAddress subnet(255, 255, 255, 0);
 IPAddress secondaryDNS(8, 8, 8, 8);  // опционально
 const char* ssid = "home";
