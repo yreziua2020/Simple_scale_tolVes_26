@@ -66,17 +66,12 @@ void Display() {
     else {
         if (UserID == 1 || UserID == 2 || UserID == 3 || UserID == 4 || UserID == 5) {  ///4 -это save
            P.setTextAlignment(PA_CENTER);
-           Text =  name_all[UserID-1];
-           // Text="Привет мир так долго небыло тебя";
+           Text =  name_all[UserID-1] +" "+(String)(units/1000)+"кг  " ;
            utf8rus(Text).toCharArray(buf, 256);
-          // P.write(buf);
            P.displayScroll(buf,PA_LEFT, PA_SCROLL_RIGHT, 40);
-           Serial.println("влет в UserID ");
-           delay(500);
+            //delay(500);
            while (!P.displayAnimate()){delay(1);}; // delay(1) -для того чтоб не сработал WDT
-        
-          
-           UserID = 0;
+            UserID = 0;
         }
     }  //else {
   }   // else if (f_clok_D) {
