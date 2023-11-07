@@ -66,7 +66,7 @@ void Display() {
     else {
         if (UserID == 1 || UserID == 2 || UserID == 3 || UserID == 4 || UserID == 5) {  ///4 -это save
            P.setTextAlignment(PA_CENTER);
-           Text =  name_all[UserID-1] +" "+(String)(units/1000)+"кг  " ;
+           Text =  name_all[UserID-1] +(String)" "+(String)(units/1000)+"кг  " ;
            utf8rus(Text).toCharArray(buf, 256);
            P.displayScroll(buf,PA_LEFT, PA_SCROLL_RIGHT, 40);
             //delay(500);

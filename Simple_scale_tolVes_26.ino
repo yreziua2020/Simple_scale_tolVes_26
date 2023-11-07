@@ -57,8 +57,8 @@ IPAddress ip(192, 168, 1, 100);
 #else
 IPAddress ip(192, 168, 1, 101);
 #endif
-IPAddress gateway(192, 168, 1, 199);
-IPAddress primaryDNS(192, 168, 1, 199);  // опционально
+IPAddress gateway(192, 168, 1, 41);
+IPAddress primaryDNS(192, 168, 1, 41);  // опционально
 IPAddress subnet(255, 255, 255, 0);
 IPAddress secondaryDNS(8, 8, 8, 8);  // опционально
 const char* ssid = "home";
@@ -232,5 +232,5 @@ void loop() {
   delay(10);
   scale_ves();
   Display();
-  //clok(); 
+  clok(); 
 }
