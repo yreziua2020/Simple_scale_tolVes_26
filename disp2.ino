@@ -4,7 +4,7 @@
 
 void Display() {
 
-  if (f_clok_D) {
+  if (f_clok_D) { //отображать время
      clok_timer = millis();  //чтобы пока часы работают взводем таймер чтоб счет небыл гдето всередине, и небыло стирание дисплея, и не было повторго срабатывания в f_clok_D = 1; ,
      String chis1, chis2, chis3, chis4, chis5, chis6;
      chis1 = String((h / 10) % 10);

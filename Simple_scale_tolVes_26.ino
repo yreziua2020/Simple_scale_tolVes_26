@@ -1,10 +1,17 @@
 //ver 011 9:38
 
-//#define  pol_ves    //разкоментировать для на польных весов
+//#define  pol_ves    //разкоментировать для на польных весов 
 #define  stol_ves    //разкоментровать для настольных весов
 
 //#define  kalib  //роз кометировать для  калибровки
 #define  raboh  // для рабочего режима розкоментировать
+
+#if !defined(pol_ves) && !defined(pol_ves) 
+#define  stol_ves
+#endif
+
+
+
 #include <ESP8266WiFi.h>              // Библиотека для создания Wi-Fi подключения (клиент или точка доступа)
 #include <ESP8266WebServer.h>         // Библиотека для управления устройством по HTTP (например из браузера)
 #include <ESP8266HTTPUpdateServer.h>  //не работает в хроме
