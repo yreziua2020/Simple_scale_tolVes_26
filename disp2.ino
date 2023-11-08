@@ -69,10 +69,11 @@ void Display() {
           // Text =  name_all[UserID-1] +(String)" "+(String)(units/1000)+"кг" ;
            Text =  name_all[UserID-1] ;  //" "+(String)(units/1000)+"кг" ;
            utf8rus(Text).toCharArray(buf, 256);
-           P.displayScroll(buf,PA_LEFT, PA_SCROLL_RIGHT, 60);
+           P.displayScroll(buf,PA_LEFT, PA_SCROLL_RIGHT, 40);
             //delay(500);
            while (!P.displayAnimate()){delay(1);}; // delay(1) -для того чтоб не сработал WDT
-            Text=(String)(units/1000)+"кг"; 
+            //Text=(String)(units/1000)+"кг"; 
+            Text=(String)(units/1000); 
            utf8rus(Text).toCharArray(buf, 256);
            P.write(buf);
            delay(500);//пауза для просмотра веса в бегущей строке
