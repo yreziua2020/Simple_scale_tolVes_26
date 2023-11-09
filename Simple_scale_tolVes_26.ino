@@ -6,6 +6,10 @@
 #include <ESP8266WiFi.h>              // Библиотека для создания Wi-Fi подключения (клиент или точка доступа)
 #include <ESP8266WebServer.h>         // Библиотека для управления устройством по HTTP (например из браузера)
 #include <ESP8266HTTPUpdateServer.h>  //не работает в хроме
+
+#include <ESP8266HTTPClient.h>
+#include <WiFiClientSecure.h>
+
 #include <HX711.h>
 //#include <SPI.h>
 #include <Adafruit_GFX.h>
@@ -51,6 +55,13 @@ const char* database_pass = "Kvw1scUvg97Y";  //пароль пользовате
 uint16_t f_eror_sql;                         //флаг ошибки sql
 ///-----------------------------------------------------------------------------------------------
 ///-----------------------------------------------------------------------------------------------
+/////////////////////////////SQL raed//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+String postData = ""; //--> Variables sent for HTTP POST request data.
+String payload = "";  //--> Variable for receiving response from HTTP POST.
+int  vlaga_perem; //чтения значение флаги из базы
+float temp_sql;
+float volt_bat;
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 WiFiClient client;
 #ifdef ip_zna
 IPAddress ip(192, 168, 1, 100);
