@@ -1,8 +1,10 @@
 void scale_ves(){
+//--------------------------------------------------------------------калибровка----------------------------------------------------
 #ifdef kalib
  Serial.print("Калибровка ");
-#else 
- 
+#endif
+ //---------------------------------------------------------------------рабочий режим-----------------------------------------------
+ #ifdef raboh     
    if ( (millis()-zader_vesi) > 350 ) { zader_vesi=millis();
 
   //scale.power_up();
@@ -32,9 +34,10 @@ void scale_ves(){
             if (units>86000&&units<120000){  f_sav=1;  Serial.print("SQL "); UserID=1; bd_sql();}
             if (units>71000&&units<85000) {  f_sav=1;  Serial.print("SQL "); UserID=2; bd_sql();}
             if (units>60000&&units<70000) {  f_sav=1;  Serial.print("SQL "); UserID=3; bd_sql();}
-#ifdef ip_zna
+#ifdef pol_ves
             if (units>20000&&units<23000) {  f_sav=1;  Serial.print("SQL "); UserID=4; bd_sql();}
-#else
+#endif
+#ifdef stol_ves
            if (units>1400&&units<1900)   {  f_sav=1;  Serial.print("No SQL ");  UserID=4; /*bd_sql();*/}
          //   if (units>1700&&units<1900)   {  f_sav=1;  Serial.print("SQL ");  UserID=4; bd_sql();}
 #endif
@@ -56,6 +59,7 @@ void scale_ves(){
 }
 
 void scale_istall(){
+  //--------------------------------------------------------------------калибровка----------------------------------------------------
 #ifdef kalib 
   Serial.println("Калибровка");
   scale.begin(DT_PIN, SCK_PIN);
@@ -68,7 +72,9 @@ void scale_istall(){
   }
   calibration_factor = calibration_factor / z;
   Serial.println(calibration_factor);
-#else 
+#endif
+ //---------------------------------------------------------------------рабочий режим-----------------------------------------------
+#ifdef raboh
   Serial.print("Рабочий");
   scale.begin(DT_PIN, SCK_PIN);
   scale.power_up();

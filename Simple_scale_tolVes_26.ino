@@ -1,7 +1,16 @@
-//ver 0711 20:52
+//ver 011 9:38
 
-#define  ip_zna  //без комента 100 наполььные  если за коментировать то 101
-//#define  kalib  //ели роз кометировать то калибруем
+//#define  pol_ves    //разкоментировать для на польных весов 
+#define  stol_ves    //разкоментровать для настольных весов
+
+//#define  kalib  //роз кометировать для  калибровки
+#define  raboh  // для рабочего режима розкоментировать
+
+#if !defined(pol_ves) && !defined(pol_ves) 
+#define  stol_ves
+#endif
+
+
 
 #include <ESP8266WiFi.h>              // Библиотека для создания Wi-Fi подключения (клиент или точка доступа)
 #include <ESP8266WebServer.h>         // Библиотека для управления устройством по HTTP (например из браузера)
@@ -63,13 +72,16 @@ float temp_sql;
 float volt_bat;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 WiFiClient client;
-#ifdef ip_zna
+#ifdef pol_ves
 IPAddress ip(192, 168, 1, 100);
-#else
-IPAddress ip(192, 168, 1, 101);
-#endif
 IPAddress gateway(192, 168, 1, 199);
 IPAddress primaryDNS(192, 168, 1, 199);  // опционально
+#endif
+#ifdef stol_ves
+IPAddress ip(192, 168, 1, 101);
+IPAddress gateway(192, 168, 1, 41);
+IPAddress primaryDNS(192, 168, 1, 41);  // опционально
+#endif
 IPAddress subnet(255, 255, 255, 0);
 IPAddress secondaryDNS(8, 8, 8, 8);  // опционально
 const char* ssid = "home";
@@ -111,6 +123,7 @@ HX711 scale;
 const int DT_PIN = 4;   //12;  //D6
 const int SCK_PIN = 5;  //14; //D5
 float units;
+//--------------------------------------------------------калибровка-------------------------------------------------------------------
 #ifdef kalib
   //калибровочные дела (раскомментить для настройки)
 float weight_of_standard = 2206.0;  // эталонный вес
@@ -119,17 +132,18 @@ const int z = 100;                  // количество измерений, 
 float calibration_value[z];         // массив для хранения считанных значений
 float calibration_factor = 0;
 //float units;
-#else
-
-#ifdef ip_zna
+#endif
+//--------------------------------------------------------Рабочий режим-------------------------------------------------------------------------------
+#ifdef raboh
+#ifdef pol_ves
 float calibration_factor = 0.80;  //для на польных -13.77
 uint16_t z_ves__vzvech=0; //задержка звешываний для разных весов разная 
-#else
+#endif
+#ifdef stol_ves
 float calibration_factor = -13.77;  //для на польных -13.77
 uint16_t z_ves__vzvech=350; //задержка звешываний для разных весов разная 
 #endif
 //float units;
-
 #endif
 ///-----------------------------------------------------------------------------------------------
 ///-----------------------------------------------------------------------------------------------
@@ -210,11 +224,12 @@ bool f_yark_d, f_yark_n;
 void loop() {
     if (!f_yark_n && (h>22 || h<6)){f_yark_d=0;f_yark_n=1;P.setIntensity(0); Serial.print("яркость 0");  }  //яркость ночью
    
-#ifdef ip_zna
+#ifdef pol_ves
   if (!f_yark_d && (h>=6 && h<=22)) {f_yark_n=0;f_yark_d=6;P.setIntensity(6); Serial.print("яркость 5");}  
   if (units > -100 && units < 100 ) 
   {
-#else
+#endif
+#ifdef stol_ves
   if (!f_yark_d && (h>=6 && h<=21)) {f_yark_n=0;f_yark_d=6;P.setIntensity(0); Serial.print("яркость 0");}   
   if (units > -10 && units < 10 )  
   {
@@ -243,5 +258,5 @@ void loop() {
   delay(10);
   scale_ves();
   Display();
-  clok(); 
+  //clok(); 
 }
