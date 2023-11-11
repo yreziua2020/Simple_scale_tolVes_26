@@ -57,7 +57,8 @@ void bd_sql_read() {
      int ves_sql =    payload.substring(thirdHashIndex + 1, fourthHashIndex).toFloat(); 
     //  volt_bat =    payload.substring(fourthHashIndex + 1, fifthHashIndex).toFloat(); 
 
-    int days = 0;
+    //int days = 0;
+    unsigned long days;
     uint32_t time;
     time = date_sql / 86400;
 
@@ -90,7 +91,7 @@ void bd_sql_read() {
     
     Serial.print("вес=");Serial.println(ves_sql/1000);
     Serial.print(h_sql);Serial.print(":");Serial.print(m_sql);Serial.print(" "); Serial.print(g_day); Serial.print("/");Serial.println(g_month);
-    Serial.print("g_year=");Serial.println(g_year);   
+    Serial.print("g_year=");Serial.println((String)g_year);   
     Serial.print("g_dayOfWeek=");Serial.println(g_dayOfWeek);    
 
     http_r.end();  //--> Close connection
