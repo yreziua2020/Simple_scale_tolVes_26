@@ -62,18 +62,33 @@ void bd_sql_read() {
    // unsigned long days;
 
     int days = 0;
-    
-
+  int g_month = 1, g_day, g_dayOfWeek, g_year;  //месяц, число . день недели год    
+/*
     uint32_t time;
     time = date_sql / 86400;
     uint16_t m_sql = ( date_sql / 60 ) % 60;
     uint16_t h_sql = ( date_sql / 3600 ) % 24;
     uint16_t s_sql =  date_sql  % 60;
-    
-  int g_month = 1, g_day, g_dayOfWeek, g_year;  //месяц, число . день недели год
+     g_dayOfWeek = (((time) + 4) % 7) + 1; //dn = (((time) + 4) % 7) + 1;
+  */  
+ uint32_t time;
+ time = (uint32_t)date_sql;
+ Serial.print("time=");Serial.println(time);
+  uint16_t s_sql  = time % 60;
+  time /= 60; // now it is minutes
+  uint16_t m_sql = time % 60;
+  time /= 60; // now it is hours
+  uint16_t h_sql = time % 24;
+  time /= 24; // now it is days
+  g_dayOfWeek = ((time + 4) % 7) + 1;  // Sunday is day 1
+ Serial.print("time2=");Serial.println(time);
 
-    g_dayOfWeek = (((time) + 4) % 7) + 1; //dn = (((time) + 4) % 7) + 1;
+
+
+
     while ((unsigned)(days += (LEAP_YEAR(g_year) ? 366 : 365)) <= time) {  g_year++; }    
+      Serial.print("g_year0=");Serial.println(g_year);
+
     days -= LEAP_YEAR(g_year) ? 366 : 365;
     time -= days;
     days = 0;
