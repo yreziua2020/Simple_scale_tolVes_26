@@ -58,6 +58,7 @@ void bd_sql_read() {
     //  volt_bat =    payload.substring(fourthHashIndex + 1, fifthHashIndex).toFloat(); 
 
     int days = 0;
+    
     uint32_t time;
     time = date_sql / 86400;
 
