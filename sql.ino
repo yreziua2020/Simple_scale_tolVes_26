@@ -57,16 +57,15 @@ void bd_sql_read() {
      int ves_sql =    payload.substring(thirdHashIndex + 1, fourthHashIndex).toFloat(); 
     //  volt_bat =    payload.substring(fourthHashIndex + 1, fifthHashIndex).toFloat(); 
 
-<<<<<<< HEAD
+
     //int days = 0;
-    unsigned long days;
-=======
+   // unsigned long days;
+
     int days = 0;
     
->>>>>>> 9479fb9a64e48ddc12ecfe976c51627f98e8ecea
+
     uint32_t time;
     time = date_sql / 86400;
-
     uint16_t m_sql = ( date_sql / 60 ) % 60;
     uint16_t h_sql = ( date_sql / 3600 ) % 24;
     uint16_t s_sql =  date_sql  % 60;
