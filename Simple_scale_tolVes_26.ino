@@ -260,5 +260,5 @@ void loop() {
   delay(10);
   scale_ves();
   Display();
-  //clok(); 
+  clok(); 
 }

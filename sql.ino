@@ -69,7 +69,10 @@ void bd_sql_read() {
   int g_month = 1, g_day, g_dayOfWeek, g_year;  //месяц, число . день недели год
 
     g_dayOfWeek = (((time) + 4) % 7) + 1; //dn = (((time) + 4) % 7) + 1;
-    while ((unsigned)(days += (LEAP_YEAR(g_year) ? 366 : 365)) <= time) {  g_year++; }    
+    while ((unsigned)(days += (LEAP_YEAR(g_year) ? 366 : 365)) <= time) {  g_year++; } 
+
+    Serial.print("g_year=");Serial.println(g_year);      
+    
     days -= LEAP_YEAR(g_year) ? 366 : 365;
     time -= days;
     days = 0;

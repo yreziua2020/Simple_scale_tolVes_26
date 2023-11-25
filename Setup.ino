@@ -26,7 +26,7 @@ void setup() {
 
   Serial.begin(115200);  delay (100);
   
-  scale_istall();
+ /////////// scale_istall();
   
 //P.print("helo");
 
@@ -43,5 +43,6 @@ delay(1000);
   
   delay(100);
   udp.begin(localPort);
+ // bd_sql_read();
   //clok();
 }
