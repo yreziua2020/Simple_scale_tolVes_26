@@ -45,4 +45,5 @@ delay(1000);
   udp.begin(localPort);
  // bd_sql_read();
   //clok();
+  bd_sql_read();
 }
